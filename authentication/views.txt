@@ -1,0 +1,178 @@
+from email import message
+from genericpath import exists
+from django import conf, views
+from django.views import View
+from django.shortcuts import redirect, render
+from django.contrib import messages
+from django.contrib.auth.models import User, auth
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
+import re
+from django.conf import settings
+
+from django.utils.http import urlsafe_base64_encode
+from django.contrib.auth.tokens import default_token_generator
+from django.urls import reverse
+from django.utils.encoding import force_bytes
+
+# Create your views here.
+
+def register(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+        confirm_password = request.POST['confirm_password']
+        
+        # # this keeps values in the field, then attach ',context' to any redirected page
+        # context = {
+        #     'fieldvalues' : request.POST
+        # }
+        
+        if password == confirm_password:      
+        #     pass   
+            if User.objects.filter(username = username).exists():
+                # this prints in my terminal the message if the username already exist
+                print('Username has been used')
+                # i thought since the user can not see my terminal i used messages info to print to the use on the web page
+                messages.warning(request, 'Username has been used')
+                return redirect('register')
+            
+            elif User.objects.filter(email = email).exists():
+                print ('Email has been used')
+                messages.warning(request, 'Email has been used')
+                return redirect('register')
+            
+            else:
+                user = User.objects.create_user(username = username, email = email, password = password)  
+                user.set_password(password)
+                user.isactive = False
+                user.save()
+                
+                # Generate activation link
+                uid = urlsafe_base64_encode(force_bytes(user.pk))
+                token = default_token_generator.make_token(user)
+                activation_link = request.build_absolute_uri(reverse('activate', kwargs={'uidb64': uid, 'token': token}))
+
+                email_subject = 'Account Created Successfully'
+                context = {
+                    'username': username,
+                    'activation_link': activation_link
+                }
+                template = render_to_string('authentication/email.html', context)  
+                email_body = template    
+                email_message = EmailMessage(
+                    email_subject,
+                    email_body,
+                    settings.DEFAULT_FROM_EMAIL,
+                    [email],
+                )
+                email_message.fail_silently = False
+                email_message.send()            
+                
+                print('User account created')
+                messages.success(request, f'{user} your account  has been created, Please sign in') 
+                # messages.success(request, f'Welcome {user} your account has been created successfully')
+                             
+                return redirect('login')
+                # return render(request, 'expenses/index.html')
+                
+                
+        # elif len(password) < 6:
+        #     print('Password too short, It should be 6 characters')
+        #     messages.error(request, 'Password too short, It should be 6 characters')
+        #     return redirect('register')
+        elif len(password) < 6 and not re.match(r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$', password):
+                print('Password must be at least 6 characters long and alphanumeric, containing both letters and numbers')
+                messages.error(request, 'Password must be at least 6 characters long and alphanumeric, containing both letters and numbers')
+                return redirect('register')
+            
+        else:
+            print("password doesn't match")
+            messages.error(request, "Password doesn't match")
+            return redirect('register')
+         
+    else: 
+         return render(request, 'authentication/register.html')
+
+
+from django.shortcuts import render, redirect
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.http import urlsafe_base64_decode
+from django.utils.encoding import force_str
+from django.contrib.auth.models import User
+from django.contrib import messages
+from django.urls import reverse
+from django.utils.http import urlsafe_base64_encode
+# from .tokens import account_activation_token
+
+
+def activate_account(request, uidb64, token):
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+        if default_token_generator.check_token(user, token):
+            user.is_active = True
+            user.save()
+            messages.success(request, 'Your account has been activated. You can now log in.')
+            return redirect('login')
+        else:
+            messages.error(request, 'The activation link is invalid or has expired.')
+            return redirect('register')
+    except User.DoesNotExist:
+        messages.error(request, 'The user does not exist.')
+        return redirect('register')
+
+
+
+def login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        
+        
+        # auth verifies the user's account in the database by taking request
+        user = auth.authenticate(username = username, password = password)
+#       user =  Customer.objects.filter( username = Customer.objects.get(email = username), password = password)
+        
+        # # if the user has an account = not none        
+        if user is not None:
+            auth.login(request, user)
+            print(f'Welcome! {user} you are now logged in')
+            messages.success(request, f'Welcome! {user} you are now logged in')
+            return redirect('expense_history')
+        else:
+            print('Your username or password is incorrect, Please fill all fields correctly')
+            messages.error(request, 'Your username or password is incorrect,  fill all fields correctly')
+            return redirect('login')
+
+        # else:
+        #     if user is None:
+        #         print('You do not have an account, please sign up')
+        #         messages.warning(request, 'You do not have an account, please sign up')
+        #         return redirect('register')
+        #     else:    
+        #         print('Your username or password is incorrect,Please fill all fields correctly')
+        #         messages.error(request, 'Your username or password is incorrect,Please fill all fields correctly')
+        #         # messages.error(request, '')
+        #         return redirect('login')
+            
+        
+    else:
+        return render(request, 'authentication/login.html')    
+
+  
+
+def logout(request):
+    auth.logout(request)
+    print("You have been logged out")
+    messages.success(request, "You have been logged out")
+    return redirect('login')
+
+# class LogoutView(View):
+#     def post(self,request):
+#         auth.logout(request)
+#         print("You have been logged out")
+#         messages.success(request, "You have been logged out")
+#         return redirect('login') 
+

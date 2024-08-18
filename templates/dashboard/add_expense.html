@@ -1,0 +1,82 @@
+{% extends 'base_dash.html' %}
+{% load static %}
+{% block content %}
+<div class="container-fluid page-body-wrapper">
+{% include 'dashboard/sidebar.html' %}
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="row">
+                    <div class="col-md-12 grid-margin">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                               <h4 class="card card-body card-title">Medinos Expense Tracker </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <div class="row">
+                        <div class="col-12 grid-margin">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Add Expense</h4>
+                                    {% comment %} <p class = "card-description"> <code>Add your transaction </code></p> {% endcomment %}
+                                    <form action = "{%url 'add_expense' %}" method = "POST" class="form-sample">
+                                        {% include 'partials/_messages.html' %}
+                                            {% csrf_token %}    
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label"><b>Date</b></label>
+                                                    <div class="col-sm-9">
+                                                        <input type="date" name = 'transaction_date' class="form-control"  placeholder = "Enter Date" />
+                                                    </div>
+                                                </div>
+                                            </div>                                            
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label"><b>Description</b></label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" name = 'description' value="{{values.description}}" class="form-control"  placeholder = "Enter description" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label"><b>Category</b></label>
+                                                    <div class="col-sm-9">
+                                                        <select class="form-control form-control-sm" name = "category" >
+                                                            {% for category in categories  %}
+                                                            <option name = "category" value= "{{category.name}}">{{category.name}}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label"><b>Amount</b></label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" name = 'amount' value="{{values.amount }}" class="form-control"  placeholder = "Enter Amount" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div>
+                                            <button type="submit" class="btn btn-primary me-2">Add Expense</button>
+                                            </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer">
+            <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">
+                    <b> &copy; <script>document.write(new Date().getFullYear());</script> | OLANEYE
+                    </b>
+                </span>
+            </div>
+        </footer>
+{% endblock %}

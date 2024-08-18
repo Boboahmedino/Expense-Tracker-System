@@ -1,0 +1,38 @@
+{%extends 'base.html'%}
+{% comment %} This extends the template and design in the html file above 
+i made a mistake extending the auth.html before i realised the auth does not have a template design i wanted {% endcomment %}
+{% load static %}
+{% comment %} this includes the other part of the page hereby linking the files created =js,css etc {% endcomment %}
+
+{% block content %}
+{% comment %} this is where we put our content in the middle like i said earlier in every linked  {% endcomment %}
+
+
+<div class = 'container mt-5'>
+    {% include 'partials/_messages.html' %}
+  <h6>Currency</h6>
+  <form action="{%url 'services' %}" method= 'post'>
+     {%csrf_token%}
+      
+    <div class="input-group mb-3">
+      <input class="change btn btn-outline-secondary" type="submit" value = 'Save'/>
+      
+      <select name = 'currency' class="form-select" id="inputGroupSelect03" aria-label="Example select with button addon">
+                {% if user_services.currency%}
+        <option name = 'currency'value="{{user_services.currency}}">{{user_services.currency}}</option>
+                {% endif %}
+             {% comment %} the currencies in the for loop has to match to the way i saved in the rendered page in my views {% endcomment %}
+          
+             {% for currency in currencies %} 
+            {% comment %} the name and value is gotten from views for loop indicated {% endcomment %}
+            <option name = 'currency' value = '{{currency.name}} - {{currency.value}}'>{{currency.name}} - {{currency.value}}</option>
+          {% endfor %} 
+          
+      </select>
+    </div>
+  </form>
+</div>
+
+<hr>
+
+{% endblock content %}

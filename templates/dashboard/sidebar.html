@@ -1,0 +1,83 @@
+{% load static %}
+{% block content %}
+    <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <ul class="nav">            
+                <li style = "pointer-events:none;" class="nav-item">
+                    <a class="nav-link" href = "">
+                        <i style= "color:blue;" class="ti-palette menu-icon"></i>
+                        <span style= "color:blue;"class="menu-title">Dashboard</span>
+                    </a>
+                </li>
+                               
+                <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
+                    aria-controls="ui-basic">
+                    <i class="ti-write menu-icon"></i>
+                    <span class="menu-title">My Expenses</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="ui-basic">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> 
+                            <a class="nav-link" href="{% url 'expense_history' %}">
+                            Expense History</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'add_expense' %}">
+                            Add Expense </a>
+                        </li>
+                    </ul>
+                </div>
+                <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
+                    aria-controls="ui-basic">
+                    <i class="ti-agenda menu-icon"></i>
+                    <span class="menu-title">My Income Source</span>
+                    <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="ui-basic">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item"> 
+                            <a class="nav-link" href="{% url 'income_history' %}">
+                            Income History</a>
+                        </li>
+
+                        <li class="nav-item">
+                                <a class="nav-link" href="{%url 'add_income' %}">
+                                Add Income Source</a>
+                        </li>
+                    </ul>
+                </div>     
+                <li style = "pointer-events:none;"  class="nav-item">
+                    <a class="nav-link" href = "">
+                        <i style= "color:blue;" class="ti-settings menu-icon"></i>
+                        <span style= "color:blue;"class="menu-title">Settings</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url "profile" %}">
+                        <i class="ti-user menu-icon"></i>
+                        <span class="menu-title">Profile</span>
+                    </a>
+                </li> 
+                {% comment %} <li class="nav-item">
+                    <a class="nav-link" href="">
+                        <i class="fa fa-money menu-icon"></i>
+                        <span class="menu-title"> Currency Tab</span>
+                    </a>
+                </li>    {% endcomment %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'change_password' %}">
+                        <i class="ti-key menu-icon"></i>
+                        <span class="menu-title"> Change Password</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">
+                        <i class="ti-power-off menu-icon"></i>
+                        <span class="menu-title"> Signout</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+{% endblock %}

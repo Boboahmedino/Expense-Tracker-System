@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expenses Report</title>
+    <style>
+        body {
+            background-color: #F6F6F6;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            margin: 0;
+            padding: 0;
+        }
+
+        p {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        .brand-section {
+            background-color: #0d1033;
+            padding: 10px 40px;
+        }
+
+        .logo {
+            width: 50%;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .col-6 {
+            width: 50%;
+            flex: 0 0 auto;
+        }
+
+        .text-white {
+            color: #fff;
+        }
+
+        .company-details {
+            float: right;
+            text-align: right;
+        }
+
+        .body-section {
+            padding: 16px;
+            border: 1px solid gray;
+        }
+
+        .heading {
+            font-size: 20px;
+            margin-bottom: 08px;
+        }
+
+        .sub-heading {
+            color: #262626;
+            margin-bottom: 05px;
+        }
+
+        table {
+            background-color: #fff;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table thead tr {
+            border: 1px solid #111;
+            background-color: #f2f2f2;
+        }
+
+        table td {
+            vertical-align: middle !important;
+            text-align: center;
+        }
+
+        table th,
+        table td {
+            padding-top: 08px;
+            padding-bottom: 08px;
+        }
+
+        .table-bordered {
+            box-shadow: 0px 0px 5px 0.5px gray;
+        }
+
+        .table-bordered td,
+        .table-bordered th {
+            border: 1px solid #dee2e6;
+        }
+
+        .text-right {
+            text-align: end;
+        }
+
+        .w-20 {
+            width: 20%;
+        }
+
+        .float-right {
+            float: right;
+        }
+        @page {
+        size: a4 portrait;
+        @frame header_frame {    
+            -pdf-frame-content: header_content;
+            left: 50pt; width: 512pt; top: 50pt; height: 40pt;
+        }
+        @frame content_frame {      
+            left: 50pt; width: 512pt; top: 70pt; height: 632pt;
+        }
+        {% comment %} @frame footer_frame {           
+            -pdf-frame-content: footer_content;
+            left: 50pt; width: 512pt; top: 772pt; height: 20pt;
+        } {% endcomment %}
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="brand-section">
+            <div class="row">
+                <div style = "" class="col-6">
+                          <center>
+                <h1 style = "font-size: 25px" class="text-white"> Medinos Expense Tracker</h1>
+                <h1 style = "font-size: 20px" class="text-white"> The Fastest way to monitor your expenses </h1>
+                <center>
+                </div>
+                <div class="col-6">
+                    <div class="company-details">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="">
+                <div class="col-6">
+                    <h2 style = "font-size: 15px" class="sub-heading">Username: {{user_name}} </h2>
+                    <h2 style = "font-size: 15px" class="sub-heading">Email: {{email}}</h2>
+                    </div>                
+            </div>
+        </div>
+
+        <div class="">
+             <h3 class="heading"> <br>Expense History</h3><br>
+           <table class="table table">
+            {% comment %} <table class="table table-hover"> {% endcomment %}
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for expense in expenses%}
+                {% comment %} {% for expense in page_obj%} {% endcomment %}
+                    <tr>
+                        <td>{{expense.date}}</td>
+                        <td>{{expense.category}}</td>
+                        <td>{{expense.description}}</td>
+                        <td>{{expense.amount}}</td>
+                    </tr>
+                    {% endfor %}
+                     <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>{{total}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <center>
+        <div class="">
+            <p> <br> &copy; Copyright 2023 - OLANEYE  </p>
+        </div>
+    </center>
+    </div>
+
+</body>
+
+</html>

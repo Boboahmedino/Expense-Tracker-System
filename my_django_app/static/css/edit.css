@@ -1,0 +1,67 @@
+.intro::after {
+	color: black;
+	font-family: Cambria;	
+	content: "Welcome to the fastest way";
+	animation: textanim 6s linear infinite;
+	
+}
+
+@keyframes textanim {
+	25% {
+		content: "To monitor your Expenses";
+	}
+
+	/* 50% {
+		content: " To monitor your Expenses";
+	} */
+
+	/* 75% {
+		content: " A developer";
+	} */
+}
+
+.footer__social a {
+	display: inline-block;
+	height: 40px;
+	width: 40px;
+	background: #00e5ff;
+	font-size: 15px;
+	color: white;
+	line-height: 60px;
+	text-align: center;
+	border-radius: 60%;
+	margin-right: 6px;
+	margin-bottom: 5px;
+	box-shadow: 0 0 0 0.2rem rgba(0, 229, 255, 0.5);
+}
+
+.footer__social a:hover {
+	background: cyan;
+}
+
+.footer__social a:last-child {
+	margin-right: 0;
+}
+
+.footer__copyright__text {
+	border-top: 1px solid #e1e1e1;
+	padding: 18px 0 25px;
+	text-align: center;
+	margin-top: 35px;
+}
+
+.footer__copyright__text p {
+	margin-bottom: 0;
+}
+
+.footer__copyright__text a {
+	color: #5C5C5C;
+}
+
+.footer__copyright__text i {
+	color: #ca1515;
+}
+
+.footer__copyright__text a:hover {
+	color: #ca1515;
+}

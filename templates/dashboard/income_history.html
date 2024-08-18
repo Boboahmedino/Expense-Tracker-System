@@ -1,0 +1,132 @@
+{% extends 'base_dash.html' %}
+{% load static %}
+{% block content %}
+
+               
+<style> 
+.edit{
+    color: #000;
+    background-color: #45fd64;
+    border-color: #45fd64;
+}
+
+.edit:hover{
+    color: #000;
+    background-color:  #0d8421;
+    border-color:  #0d8421;
+}
+.delete {
+    color: #000;
+    background-color: rgb(245, 65, 65);
+    border-color: rgb(245, 65, 65);
+}
+
+.delete:hover {
+    color: #000;
+    background-color: rgb(147, 15, 15);
+    border-color: rgb(147, 15, 15);
+}
+</style>
+<div class="container-fluid page-body-wrapper">
+{% include 'dashboard/sidebar.html' %}
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="row">
+                    <div class="col-md-12 grid-margin">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                               <h4 class="card card-body card-title">Medinos Expense Tracker</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                    <div class="row">
+                        <div class="col-12 grid-margin">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Income History</h4>
+                                    <p class = "card-description"><code>This is the list of your Income at Medinos Expense Tracker</code></p>
+                                        {% include 'partials/_messages.html' %}
+                               
+                                    <div class="row">
+                                <div class="col-md-12 grid-margin stretch-card">
+                                            <div class="card position-relative">
+                                                <div class="card-body">
+                                                    {% comment %} <div class="list-wrapper"> {% endcomment %}
+                                                        <div class="table-responsive">
+                                                            <table class="table table">
+                                                            {% comment %} <table class="table table-hover"> {% endcomment %}
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Date</th>
+                                                                        <th>Category</th>
+                                                                        <th>Description</th>
+                                                                        <th>Amount </th>
+                                                                        <th><th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                {% for income in page_obj%}
+                                                                    <tr>
+                                                                        <td>{{income.date}}</td>
+                                                                        <td>{{income.source}}</td>
+                                                                        <td>{{income.description}}</td>
+                                                                        <td>{{income.amount}}</td>
+                                                                        <td>
+                                                                        <a href= "{% url 'edit_income' income.id%}" class="edit btn btn-primary "><i class="ti-pencil-alt"></i></a>
+                                                                        <a href = "{%url 'delete_income' income.id%}" class = "delete btn btn-primary"><i class="ti-trash"></i></a>
+                                                                        </td>
+                                                                    </tr>
+                                                                    {% endfor %}
+                                                                </tbody>
+                                                            {% comment %} </table> {% endcomment %}
+                                                            </table>
+
+                                                        </div>
+                                                        <div class="pagination-container">
+                                                            <div style="padding:15px;" class="">
+                                                               <p ><code> Showing page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }} </code></p>
+                                                               <ul style = "float:right;" class="pagination align-right float-right mr-auto">
+                                                                {% if page_obj.has_previous %}
+                                                                <li {% if page_obj.number == 1 %} class="page-item active" {% endif %}><a class="page-link" href="?page=1">&laquo; 1</a></li>
+                                                                <li class="page-item"> <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+                                                                {% endif %}
+
+                                                                {% if page_obj.has_next %}
+                                                                <li class="page-item"> <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+                                                                <li class="page-item"> <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages}} &raquo;</a></li>
+                                                                {% endif %}
+                                                            </ul>
+                                                            
+                                                            </div>
+                                                           {% comment %} <ul style = "float:right;" class="pagination align-right float-right mr-auto">
+                                                                {% if page_obj.has_previous %}
+                                                                <li {% if page_obj.number == 1 %} class="page-item active" {% endif %}><a class="page-link" href="?page=1">&laquo; 1</a></li>
+                                                                <li class="page-item"> <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+                                                                {% endif %}
+
+                                                                {% if page_obj.has_next %}
+                                                                <li class="page-item"> <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+                                                                <li class="page-item"> <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages}} &raquo;</a></li>
+                                                                {% endif %}
+                                                            </ul> {% endcomment %}
+                                                        </div>
+                                                        </div>
+                                            </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+             </div>
+        </div>
+<footer class="footer">
+            <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">
+                    <b> &copy; <script>document.write(new Date().getFullYear());</script> | OLANEYE
+                    </b>
+                </span>
+            </div>
+        </footer>
+{% endblock %}

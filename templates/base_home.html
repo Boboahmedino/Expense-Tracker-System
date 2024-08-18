@@ -1,0 +1,18 @@
+{%load static%}
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta author= "Olaneye Ahmed Oladapo">
+        <title>Medinos Expense Tracker{% block title %}  {% endblock %}</title>
+        <link rel="icon" type="image/x-icon" href="{%static "img/save.png" %}"> 
+        <link href="{% static "css/home.css" %}" rel="stylesheet" id="theme-color">
+        <link href="{% static "css/font-awesome.min.css" %}" rel="stylesheet">
+        <link href="{% static "css/edit.css" %}" rel="stylesheet">
+        </head>
+    <body>
+            {% block content %}
+            {% endblock %}
+        <script src="{% static "js/scripts.js" %}"></script>
+    </body>
+</html>

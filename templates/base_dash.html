@@ -1,0 +1,32 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta author= "Olaneye Ahmed Oladapo">
+    <title>Medinos Expense Tracker|Dashboard {% block title %} {% endblock %}
+    </title>
+    <link rel="icon" type="image/x-icon" href="{%static "img/save.png" %}">
+    <link rel="stylesheet" href="{%static "css/font-awesome.min.css" %}">
+    <link rel="stylesheet" href="{%static "css/dashboard1.css" %}">
+    <link rel="stylesheet" href="{%static "css/dashboard2.css" %}">
+    <link rel="stylesheet" href="{%static "css/dashboard3.css" %}">
+    <link rel="stylesheet" href="{%static "css/edit.css" %}">
+</head>
+<body>
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        {% include 'dashboard/navbar.html' %}
+    </nav>
+        {% block content %}
+        {% endblock %}
+    </div>
+    <script src="{%static "js/base.js" %}"></script>
+    <script src="{%static "js/chart.min.js" %}"></script>
+    <script src="{%static "js/jquery.js" %}"></script>
+    <script src="{%static "js/canvas.js" %}"></script>
+    <script src="{%static "js/collapse.js" %}"></script>
+    <script src="{%static "js/template.js" %}"></script>
+    <script src="{%static "js/todolist.js" %}"></script>
+    <script src="{%static "js/dashboard.js" %}"></script>
+</body>
+</html>

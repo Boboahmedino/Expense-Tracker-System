@@ -1,0 +1,77 @@
+{% extends 'base_dash.html' %}
+{% load static %}
+{% block content %}
+<div class="container-fluid page-body-wrapper">
+{% include 'dashboard/sidebar.html' %}
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="row">
+                    <div class="col-md-12 grid-margin">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                               <h4 class="card card-body card-title">Medinos Expense Tracker </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <div class="row">
+                        <div class="col-12 grid-margin">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Edit Expense</h4>
+                                    <p class = "card-description"> <code>Please Update your Information </code></p>
+                                    <form action = "{%url 'edit_expense' expense.id %}" method = "POST" class="form-sample">
+                                        {% include 'partials/_messages.html' %}
+                                            {% csrf_token %}    
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label"><b>Date</b></label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" name = 'transaction_date' value= "{{values.date |date:'Y-m-d' }}" class="form-control" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label"><b>Description</b></label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" name = 'description' value= "{{values.description}}" class="form-control" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label"><b>Category</b></label>
+                                                    <div class="col-sm-9">
+                                                        <select class="form-control form-control-sm" name = "category" >
+                                                            <option name="category"  selected value="{{values.category}}">{{values.category}}</option>
+                                                            {% for category in categories  %}
+                                                            <option name = "category" value= "{{category.name}}">{{category.name}}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                             <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3 col-form-label"><b>Amount</b></label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" name = 'amount' value="{{values.amount}}" class="form-control"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                    <button type="submit" class="btn btn-primary me-2">Update</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+        </div>
+    </div>
+{% endblock %}

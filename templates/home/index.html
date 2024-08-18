@@ -1,0 +1,134 @@
+{% extends 'base_home.html' %}
+{% load static %}
+{% block content %}
+        <section class="py-5 py-md-7" id="home">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 my-md-auto mb-5 mb-md-0 text-center text-md-left">
+                        <span style = "font-family: cambria; font-size: 25px;" class="text-uppercase text-muted large-xxl">Medinos Expense Tracker</span>
+                        <h1 class="display-4 mt-2 mb-5 intro"></h1>
+                        <div>
+                           <form method='post'>
+                             {% csrf_token %}
+                                <a href="{%url 'login' %}" class="btn btn-primary d-inline-flex flex-row align-items-center">
+                                Sign In
+                                </a>
+                                <a href="{%url "register" %}" class="btn btn-secondary d-inline-flex flex-row align-items-center">
+                                Sign Up
+                                </a>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-6 play-wrapper">
+                        <img src="{%static "img/coin.jpg" %}" class="img-fluid d-block mx-auto" alt="Coins in a jar" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="py-1" id="features">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 mx-auto">
+                        <h2 class="dot-circle">There are enough reasons to use this Application.</h2>
+                        <div class="row mt-6">
+                            <div class="col-sm-6 mb-5">
+                                <div class="media">
+                                    <div class="icon-box mt-0 ml-0">
+                                        <div class="icon-box-inner btn btn-primary small-xs text-primary">
+                                           <i style= "color:white; font-size:25px" class="fa fa-user"></i>
+                                        </div>
+                                    </div>
+                                    <div class="media-body">
+                                        <h5 class="mt-0">Unlimited Access</h5>
+                                        <span class="text-muted">You can manage your Profile by Adding and Editing your Expenses anytime.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mb-5">
+                                <div class="media">
+                                    <div class="icon-box mt-0 ml-0">
+                                        <div class="icon-box-inner btn btn-primary small-xs text-primary">
+                                           <i style= "color:white; font-size:25px" class="fa fa-bolt"></i>
+                                        </div>
+                                    </div>
+                                    <div class="media-body">
+                                        <h5 class="mt-0">Fast and Easy to Use</h5>
+                                        <span class="text-muted">A responsive interface to make it easier and faster to navigate through your expenses.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mb-5">
+                                <div class="media">
+                                    <div class="icon-box mt-0 ml-0">
+                                        <div class="icon-box-inner btn btn-primary small-xs text-primary">
+                                        {% comment %} <div class="icon-box-inner btn btn-secondary small-xs text-primary"> {% endcomment %}
+                                           <i style= "color:white; font-size:25px" class="fa fa-universal-access"></i>
+                                        </div>
+                                    </div>
+                                    <div class="media-body">
+                                        <h5 class="mt-0">Free for All</h5>
+                                        <span class="text-muted">It versatility makes it easy to be used by any Person, Private Organization and Governmental Agencies.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mb-5">
+                                <div class="media">
+                                    <div class="icon-box mt-0 ml-0">
+                                        <div class="icon-box-inner btn btn-primary small-xs text-primary">
+                                           <i style= "color:white; font-size:25px" class="fa fa-globe"></i>
+                                        </div>
+                                    </div>
+                                    <div class="media-body">
+                                        <h5 class="mt-0">Global Usage</h5>
+                                        <span class="text-muted">It can be used anywhwere in the world.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+        </section>
+        {% comment %} <section class=" mt-10" id="contact">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 mx-auto">
+                        <h2 class="dot-circle">Need help?</h2>
+                        <p class="text-muted lead">We'd love to answer your questions.</p>
+                    
+                        <div class="row mt-5 card-contacts">
+                            <div class="col-md-6 mb-3">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <div class="icon-box">                                            
+                                        </div>
+                                        <a href="mailto:Rah_kellen@hotmail.com" class="btn btn-primary page-scroll" ><h5>Send us an email</h5></a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </section> {% endcomment %}
+        <footer class="mt-5 mb-4">
+            <div class="container">
+                <div class="row mt-2">
+                <div class="col-12 text-muted text-center medium">
+                    {% comment %} <div class="footer__copyright__text"> {% endcomment %}
+                        <div class="footer__social">
+                            <a href="https://twitter.com/boboahmedino"><i style= "padding:7px;font-size:x-large;" class="fa fa-twitter"></i></a>
+                            <a href="https://wa.me/+2349038967463"><i style= "padding:7px; font-size:x-large;" class="fa fa-whatsapp"></i></a>
+                            <a href="https://instagram.com/boboahmedino"><i style= "padding:7px; font-size:x-large;" class="fa fa-instagram"></i></a>
+                        </div>
+                        <br>
+                     {% comment %} </div> {% endcomment %}
+                        &copy; <script>document.write(new Date().getFullYear());</script> | OLANEYE
+                    </div>
+                </div>
+            </div>
+        </footer>
+  {% endblock %}
