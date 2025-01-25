@@ -99,8 +99,8 @@ WSGI_APPLICATION = 'my_django_app.wsgi.application'
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
 #         'NAME': ('income_expenses'),
-#         'USER' : ('postgres'),
-#         'PASSWORD' : (1234),
+#         'USER' : ('.....'),
+#         'PASSWORD' : (.....),
 #         'HOST' : ('localhost'),
 #         }
 # }
@@ -109,10 +109,10 @@ DATABASES = {
     'default': {
        'ENGINE': 'django.db.backends.postgresql',
         'NAME': ('postgres'),
-        'USER' : ('postgres.mgaufkwwoipjpuwmwisw'),
-        'PASSWORD' : ('Boboahmedino9*'),
-        'HOST' : ('aws-0-us-west-1.pooler.supabase.com'),
-        'PORT': ('6543'),
+        'USER' : ('....'),
+        'PASSWORD' : ('...'),
+        'HOST' : ('......'),
+        'PORT': ('......'),
 }
 }
 # Password validation
@@ -175,8 +175,8 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST =  'smtp-mail.outlook.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'rahkellen@hotmail.com'
-DEFAULT_FROM_EMAIL = 'Medinos Expense Tracker <rahkellen@hotmail.com>' 
-EMAIL_HOST_PASSWORD= 'Shenanigans8'
+EMAIL_HOST_USER = 'yourmail.com'
+DEFAULT_FROM_EMAIL = 'Medinos Expense Tracker <yourmail.com>' 
+EMAIL_HOST_PASSWORD= 'yourpassword'
 
 
