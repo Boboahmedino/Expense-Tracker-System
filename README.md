@@ -31,6 +31,10 @@ This command will automatically install all the necessary libraries, including D
 
 + **Environment Setup:** It’s recommended to use a virtual environment to manage your dependencies and ensure a clean project setup.
 
+---
+
+## Author
+Olaneye Ahmed Oladapo
 
 
 
